@@ -3,7 +3,7 @@ class ModelCrud {
     this.model = model;
   }
 
-  get = (req, res, next) => {
+  getAll = (req, res, next) => {
     return this.model
       .findAll()
       .then((resp) => res.send(resp))
