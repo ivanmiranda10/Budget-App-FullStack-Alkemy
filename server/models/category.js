@@ -18,9 +18,6 @@ module.exports = (sequelize) => {
         type: DataTypes.ENUM("Incomes", "Expenses"),
         defaultValue: "Incomes",
       },
-      image: {
-        type: DataTypes.STRING,
-      },
     },
     {
       timestamps: false,
