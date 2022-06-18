@@ -13,26 +13,26 @@ module.exports = (sequelize) => {
       username: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true,
       },
-      password: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          isAlphanumeric: true,
-        },
-      },
+      //   password: {
+      //     type: DataTypes.STRING,
+      //     allowNull: false,
+      //     validate: {
+      //       isAlphanumeric: true,
+      //     },
+      //   },
       email: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique: true,
         validate: {
           isEmail: true,
         },
       },
-      logged: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false,
-      },
+      //   logged: {
+      //     type: DataTypes.BOOLEAN,
+      //     defaultValue: false,
+      //   },
     },
     {
       timestamps: false,

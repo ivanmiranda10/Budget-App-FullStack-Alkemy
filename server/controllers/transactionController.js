@@ -1,5 +1,5 @@
 const { Op } = require("sequelize");
-const { Transaction, Category } = require("../database");
+const { Transaction, Category, User } = require("../database");
 const ModelCrud = require("./index");
 
 class TransactionModel extends ModelCrud {
@@ -16,11 +16,15 @@ class TransactionModel extends ModelCrud {
   };
 
   addJoinModels = async (req, res, next) => {
-    const { category, ...body } = req.body;
+    const { user, category, ...body } = req.body;
     try {
       const newInstance = await this.model.create({ ...body });
-      const join = await Category.findOne({ where: { name: category } });
-      await join.addTransaction(newInstance);
+      const joinUser = await User.findOne({ where: { email: user } });
+      const joinCategory = await Category.findOne({
+        where: { name: category },
+      });
+      await joinUser.addTransaction(newInstance);
+      await joinCategory.addTransaction(newInstance);
       res.send("item has been created");
     } catch (err) {
       next(err);
@@ -30,8 +34,8 @@ class TransactionModel extends ModelCrud {
   getWithJoin = (req, res, next) => {
     return this.model
       .findAll({
-        attributes: { exclude: ["categoryId"] },
-        include: { model: Category },
+        attributes: { exclude: ["categoryId", "userId"] },
+        include: [{ model: Category }, { model: User }],
       })
       .then((resp) => res.send(resp))
       .catch((err) => next(err));
