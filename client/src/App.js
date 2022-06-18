@@ -1,27 +1,16 @@
-import "./App.css";
-import { useAuth0 } from "@auth0/auth0-react";
-
-import LoginButton from "./components/login";
-import LogoutButton from "./components/logout";
-import UserProfile from "./components/profile";
+import { Routes, Route, Navigate } from "react-router-dom";
+// import { useAuth0 } from "@auth0/auth0-react";
+// import LoginButton from "./components/Auth0/login";
+// import LogoutButton from "./components/Auth0/logout";
+// import UserProfile from "./components/Auth0/profile";
+import LandingPage from "./components/Landing";
 
 function App() {
-  const { isAuthenticated } = useAuth0();
-
+  //   const { user } = useAuth0();
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>Welcome!</p>
-        {isAuthenticated ? (
-          <>
-            <UserProfile />
-            <LogoutButton />
-          </>
-        ) : (
-          <LoginButton />
-        )}
-      </header>
-    </div>
+    <Routes>
+      <Route exact path="/" element={<LandingPage />} />
+    </Routes>
   );
 }
 
