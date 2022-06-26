@@ -1,8 +1,8 @@
 import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import UserProfile from "../Auth0/profile";
 import LoginButton from "../Auth0/login";
 import LogoutButton from "../Auth0/logout";
+import Balance from "../Balance";
 
 const LandingPage = () => {
   const { user, isAuthenticated } = useAuth0();
@@ -12,11 +12,16 @@ const LandingPage = () => {
       <header>
         {isAuthenticated ? (
           <>
-            <UserProfile />
-            <LogoutButton />
+            <Balance />
+            <br />
+            <div>
+              <LogoutButton />
+            </div>
           </>
         ) : (
-          <LoginButton />
+          <>
+            <LoginButton />
+          </>
         )}
       </header>
     </div>
